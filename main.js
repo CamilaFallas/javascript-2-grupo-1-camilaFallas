@@ -87,6 +87,25 @@
 
 // 1. Respuesta pregunta 1
 
+let lista= [1,2,3,345,45,23,12,34,38,37,8,6,16];
+let pares = [];
+let impares = [];
+
+function parImpar (lista) {
+  for (let i=0; i<lista.length;i++) {
+      if (lista[i]%2==0)
+      {
+          pares.push(lista[i]);
+      }
+      else
+      {
+          impares.push(lista[i]);
+      }
+  }
+console.log ('Lista de numeros pares es ' + pares)
+console.log ('Lista de numeros impares es ' + impares)
+  }
+parImpar (lista,pares,impares);
 
 // ====================================================================================================
 
