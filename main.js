@@ -1,117 +1,80 @@
-// Prueba Diagnostico
+// Mini proyecto: Libreria
+// Crear un programa que simule una librería. Debe tener las siguientes características:
+// 1. Debe tener una clase Libreria que tenga las siguientes propiedades:
+//      1.1 Nombre
+//      1.2. Dirección
+//      1.3. Libros // lista de libros
+//      1.4. Comics // lista de comics
+//      1.5. Debe contar un método que permita agregar libros y comics a la librería.
+class Libreria {
+  constructor (nombre, direccion, libros, comics) {
+    this.nombre = nombre;
+    this.direccion = direccion;
+    this.libros = libros || [];
+    this.comics = comics || [];
+  } 
 
-// I Parte: Teoría
+  function(titulo) {
+    this.libros.push(titulo)
+}
 
-// 1. Respuesta pregunta 1
+function(titulo) {
+  this.comics.push(titulo)
+}
+}
 
-// Numero: Se escribe sin comillas, representa un valor y estos pueden ser enteros Ej 3 o decimales Ej 3.3
-//String: Son letras, se escriben dentro de comillas, sino serian valores predeterminados de js, caracteres en general de texto. Ej:'Hola'
-//Buleano: Tiene valor de verdadero o falso. true false
-//Undefine: No conocemos el valor de la variable. 
-
-// ====================================================================================================
-
-
-// 2. Respuesta pregunta 2
-
-// let personas = { nombre: "Sofia", nombre: "Pedro", nombre: "Carlos" };
-//personas.nombre = 'Ericka';
-
-// let personas = { nombre: "Sofia", nombre: "Pedro", nombre: "Carlos" };
-// personas['nombre'] = "Ericka";
-
-// ====================================================================================================
-
-
-// 3. Respuesta pregunta 3
-
-// +=: Aca el console.log de list me va a mostrar la suma del valor de la variable declarada arriba con el valor del numero agregado con += 
-// el segundo console.log me va a mostrar el resultado nuevamente de la suma anterior junto con el texto agregado de 'textoDePrueba', todo esto como un string.
-
-// ====================================================================================================
+const libreria1 = new Libreria ('Historias', 'Cost Rica')
+//console.log (libreria1)
 
 
-// 4. Respuesta pregunta 4
+// 2. Debe tener una clase Libro que represente un libro y tenga las siguientes propiedades: título, autor, precio, cantidad y año.
+// 4. ** Los usuarios no pueden modificar datos de los libros o comics, pero sí pueden modificar la cantidad de libros disponibles, o el año, de igual forma deben ser propiedades privadas
+// // ** tener en cuenta que para poder acceder y modificar las propiedades privadas debe usar getters y setters
 
-//!= y !== me compara la negacion por decirlo de una forma, a diferencia de que != no es estricto, o sea no le importan si compara 10 con '10', el 
-// lo hace, en cambio !== si toma en cuenta como este ingresado el dato.
-
-// != : No es estricto asi que daria false
-//!== : Daria False
-
-// != : Daria False ya que compara numero ignorando que este entre comillas como un string
-// !== :Daria  True ya que compara el number con string
-
-
-// ====================================================================================================
-
-
-// 5. Respuesta pregunta 5
-
-// Funciones que se encuentran almacenadas dentro de una variable y solo se pueden utilizar llamando esa variable
-
-// ====================================================================================================
-
-
-// 6. Respuesta pregunta 6
-
-// Una funcion declarada es aquella que hago en termino generales, fuera de funciones por ejemplo que me va a aplicar con el mismo valor y
-//no la puedo volver a declarar mas adelante dentro del js, en cambio las de expresion estan dentro de las funciones y tiene ese valor para
-//ese espacio en especifico y se puede declarar mas adelante dentro de otra funcion.
-
-// ====================================================================================================
-
-
-// 7. Respuesta pregunta 7
-
-// Funciones o sea porciones de codigo que estan dentro de un objeto en especifico
-
-// ====================================================================================================
-
-
-// 8. Respuesta pregunta 8
-
-// La recursividad es cuando desgrano un problema de atras para adelante, la intencion es que la funcion se pueda llamar e ir desgranando 
-
-// ====================================================================================================
-
-
-// II Parte: Ejercicios
-
-// Crear un programa que permita separar una lista de números aleatorios en
-// dos listas nuevas, de manera que se separen los valores en pares e impares.
-// Dicho programa debe recibir una lista de números como parámetro e iterar
-// dicha lista, de manera que se pueda verificar si el número es par o impar y
-// agrupar correctamente en la lista de números pares o impares. Al final debe
-// imprimirse ambas listas.
-
-// 1. Respuesta pregunta 1
-
-let lista= [1,2,3,345,45,23,12,34,38,37,8,6,16];
-let pares = [];
-let impares = [];
-
-function parImpar (lista) {
-  for (let i=0; i<lista.length;i++) {
-      if (lista[i]%2==0)
-      {
-          pares.push(lista[i]);
-      }
-      else
-      {
-          impares.push(lista[i]);
-      }
+class Libro {
+  #cantidad = 0;
+  #anio = '';
+  constructor (titulo, autor, precio, cantidad, anio) {
+    this.titulo = titulo;
+    this.autor = autor;
+    this.precio = precio;
+    this.#cantidad = cantidad;
+    this.#anio = anio;
   }
-console.log ('Lista de numeros pares es ' + pares)
-console.log ('Lista de numeros impares es ' + impares)
+
+  set setCantidad (disponibles) {
+    this.#cantidad = disponibles;
   }
-parImpar (lista,pares,impares);
+  
+  get getCantidad () {
+    return this.#cantidad
+  }
+  
+  set setAnio (fecha) {
+    this.#cantidad = fecha;
+  }
+  get getAnio () {
+    return this.#anio
+  }
+}
 
-// ====================================================================================================
+const libro1 = new Libro ('Aves', 'KS', 5000, 0, 2023);
+console.log (libro1);
+libro1.setCantidad = 5;
+console.log ("Cantidad actualizada" , libro1.getCantidad);
+
+// 3. Debe tener una clase Comic que herede de Libro y tenga las siguientes propiedades extras: dibujante, editorial, volumen.
+class Comic extends Libro {
+  constructor(titulo, autor, precio, cantidad, anio, dibujante, editorial, volumen){
+    super(titulo, autor, precio, cantidad, anio);
+    this.dibujante = dibujante;
+    this.editorial = editorial;
+    this.volumen = volumen;
+  }
+}
+
+// 5. Debe haber un método que permita obtener la información completa de un libro o comic, este debe llamarse "getInfo".
 
 
-// 2. Respuesta pregunta 2
 
-// Colocar el código acá
-
-// ====================================================================================================
+// 6. En caso de que la cantidad de libros o comics sea 0, debe mostrar un mensaje que diga "No hay ejemplares disponibles". 
