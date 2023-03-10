@@ -1,117 +1,158 @@
-// Prueba Diagnostico
-
-// I Parte: Teoría
-
-// 1. Respuesta pregunta 1
-
-// Numero: Se escribe sin comillas, representa un valor y estos pueden ser enteros Ej 3 o decimales Ej 3.3
-//String: Son letras, se escriben dentro de comillas, sino serian valores predeterminados de js, caracteres en general de texto. Ej:'Hola'
-//Buleano: Tiene valor de verdadero o falso. true false
-//Undefine: No conocemos el valor de la variable. 
-
-// ====================================================================================================
-
-
-// 2. Respuesta pregunta 2
-
-// let personas = { nombre: "Sofia", nombre: "Pedro", nombre: "Carlos" };
-//personas.nombre = 'Ericka';
-
-// let personas = { nombre: "Sofia", nombre: "Pedro", nombre: "Carlos" };
-// personas['nombre'] = "Ericka";
-
-// ====================================================================================================
-
-
-// 3. Respuesta pregunta 3
-
-// +=: Aca el console.log de list me va a mostrar la suma del valor de la variable declarada arriba con el valor del numero agregado con += 
-// el segundo console.log me va a mostrar el resultado nuevamente de la suma anterior junto con el texto agregado de 'textoDePrueba', todo esto como un string.
-
-// ====================================================================================================
-
-
-// 4. Respuesta pregunta 4
-
-//!= y !== me compara la negacion por decirlo de una forma, a diferencia de que != no es estricto, o sea no le importan si compara 10 con '10', el 
-// lo hace, en cambio !== si toma en cuenta como este ingresado el dato.
-
-// != : No es estricto asi que daria false
-//!== : Daria False
-
-// != : Daria False ya que compara numero ignorando que este entre comillas como un string
-// !== :Daria  True ya que compara el number con string
-
-
-// ====================================================================================================
-
-
-// 5. Respuesta pregunta 5
-
-// Funciones que se encuentran almacenadas dentro de una variable y solo se pueden utilizar llamando esa variable
-
-// ====================================================================================================
-
-
-// 6. Respuesta pregunta 6
-
-// Una funcion declarada es aquella que hago en termino generales, fuera de funciones por ejemplo que me va a aplicar con el mismo valor y
-//no la puedo volver a declarar mas adelante dentro del js, en cambio las de expresion estan dentro de las funciones y tiene ese valor para
-//ese espacio en especifico y se puede declarar mas adelante dentro de otra funcion.
-
-// ====================================================================================================
-
-
-// 7. Respuesta pregunta 7
-
-// Funciones o sea porciones de codigo que estan dentro de un objeto en especifico
-
-// ====================================================================================================
-
-
-// 8. Respuesta pregunta 8
-
-// La recursividad es cuando desgrano un problema de atras para adelante, la intencion es que la funcion se pueda llamar e ir desgranando 
-
-// ====================================================================================================
-
-
-// II Parte: Ejercicios
-
-// Crear un programa que permita separar una lista de números aleatorios en
-// dos listas nuevas, de manera que se separen los valores en pares e impares.
-// Dicho programa debe recibir una lista de números como parámetro e iterar
-// dicha lista, de manera que se pueda verificar si el número es par o impar y
-// agrupar correctamente en la lista de números pares o impares. Al final debe
-// imprimirse ambas listas.
-
-// 1. Respuesta pregunta 1
-
-let lista= [1,2,3,345,45,23,12,34,38,37,8,6,16];
-let pares = [];
-let impares = [];
-
-function parImpar (lista) {
-  for (let i=0; i<lista.length;i++) {
-      if (lista[i]%2==0)
-      {
-          pares.push(lista[i]);
-      }
-      else
-      {
-          impares.push(lista[i]);
-      }
+class Bookstore {
+  #bookstoreName;
+  #address;
+  #books;
+  #comics;
+  constructor(bookstoreName, address) {
+    this.#bookstoreName = bookstoreName;
+    this.#address = address;
+    this.#books = [];
+    this.#comics = [];
   }
-console.log ('Lista de numeros pares es ' + pares)
-console.log ('Lista de numeros impares es ' + impares)
+
+
+  // getters
+  get getBooks() {
+    return this.#books;
   }
-parImpar (lista,pares,impares);
 
-// ====================================================================================================
+  get getComics() {
+    return this.#comics;
+  }
+
+  get getName() {
+    return this.#bookstoreName
+  }
+
+  // setters
+  set setBookstoreName(name) {
+    this.#bookstoreName = name;
+  }
+
+  set setAddress(address) {
+    this.#address = address;
+  }
+
+  set setBooks(book) {
+    this.#books.push(book);
+  }
+
+  set setComics(comic) {
+    this.#comics.push(comic);
+  }
+}
+
+class Book {
+  #title;
+  #author;
+  #price;
+  #stock;
+  #year;
+  
+  constructor(title, author, price, stock, year) {
+    this.#title = title;
+    this.#author = author;
+    this.#price = price;
+    this.#stock = stock;
+    this.#year = year;
+  }
+
+  getInfo() {
+    return {
+      title: this.#title,
+      auhor: this.#author,
+      price: this.#price,
+      year: this.#year,
+      stock: !this.#stock ? 'No hay ejemplares disponibles' : this.#stock
+    }
+  }
+
+  // setters
+  set setStock(stock) {
+    this.#stock = stock;
+  }
+
+  set setYear(year) {
+    this.#year = year;
+  }
+}
+
+class Comic extends Book {
+  #illustrator;
+  #publisher;
+  #volume;
+  constructor(title, author, price, stock, year, illustrator, publisher, volume) {
+    super(title, author, price, stock, year);
+    this.#illustrator = illustrator;
+    this.#publisher = publisher;
+    this.#volume = volume;
+  }
+
+  getInfo () {
+    const info = super.getInfo(); 
+    return {
+      ...info,
+      illustrator: this.#illustrator,
+      publisher: this.#publisher,
+      volume: this.#volume
+    }
+  }
+}
+
+const bookstore1 = new Bookstore('Libreria 1', 'Calle 1');
+
+// const addBook = () => {
+//   const book = new Book('El principito', 'Antoine de Saint', 100, 10, 1943);
+//   bookstore1.setBooks = book.getInfo();
+//   console.log('Add book')
+// } 
+
+// const addComic = () => {
+//   const comic = new Comic('Batman', 'bob kane', 200, 5, '1939', 'Bob kane', 'DC Comics', 1);
+//   bookstore1.setComics = comic.getInfo();
+//   console.log('Add Comic')
+// }
+
+// const showProducts = () => {
+//   console.log('Books')
+//   console.log(bookstore1.getBooks);
+
+//   console.log('Comics')
+//   console.log(bookstore1.getComics);
+// }
+
+const sidebar = document.getElementById('sidebar');
+const menu = ['Show Books', 'Show Comics', 'Add book', 'Add Comic'];
+
+const printBookstoreName = () => {
+  sidebar.insertAdjacentHTML(
+    'afterbegin',
+    `<h2 class="title">
+      ${bookstore1.getName}
+    </h2>`
+  )
+}
+
+printBookstoreName();
+
+// ** TAREA **
+// Crear una función que se encargué de crear el menu, iterando sobre la lista menu (línea 125)
+// Debe generarse un element html tipo ul, y dentro de ese ul un li para cada elemento lista; Puede ver el ejemplo de lo que debe crear en el html 
 
 
-// 2. Respuesta pregunta 2
+// const menu = ['Show Books', 'Show Comics', 'Add book', 'Add Comic'];
 
-// Colocar el código acá
 
-// ====================================================================================================
+const container = document.getElementById("sidebar");
+const ul = document.createElement("ul");
+
+function createMenu () {
+  menu.forEach((item) => {
+      let li = document.createElement("li");
+      li.innerText = item;
+      ul.appendChild(li);
+    });
+  container.appendChild(ul);
+}
+
+createMenu ();
