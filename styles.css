@@ -1,10 +1,51 @@
+body {
+	margin: 0;
+	padding:0;
+}
+
+ul {
+	list-style: none;
+	margin: 0 auto;
+	padding: 0;
+}
+
+a {
+	color: #f5f5f5;
+	text-decoration: none;
+}
+
+li {
+	margin-bottom: 40px;
+	border: solid 3px rgb(221, 221, 143);
+	padding: 5px;
+	text-align: center;
+}
+
+.container {
+	display: flex;
+}
+
 .sidebar {
 	background-color: #292929;
 	color: #f5f5f5;
 	width: 15vw;
-	height: 100vh;
+	height: 115vh;
 	display: flex;
 	flex-direction: column;
 	/* align-items: center;
 	justify-content: center; */
+}
+
+.title {
+	display: flex;
+	align-items: center;
+}
+
+.logo {
+	height: 40px;
+}
+
+.show-container {
+	grid-row: 1;
+	border: solid 3px rgb(175, 175, 175)
 }
